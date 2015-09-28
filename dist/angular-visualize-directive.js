@@ -57,8 +57,8 @@ angular.module('angular-visualize-directive', [])
                       top: '50%', // Top position relative to parent
                       left: '50%' // Left position relative to parent
                     };
-                    //var target = document.getElementById('report');
-                    //var spinner = new Spinner(opts).spin(target);			
+                    var target = document.getElementById(element[0].id);
+                    var spinner = new Spinner(opts).spin(target);			
 
                     /* Configure your jasperserver connection */
                     visualize(
@@ -72,7 +72,7 @@ angular.module('angular-visualize-directive', [])
 
                     function (v) {
                         v("#"+element[0].id).report({resource:scope.resource,params: scope.params});
-                        //spinner.stop();
+                        spinner.stop();
                     },
 
                     function (err) {
