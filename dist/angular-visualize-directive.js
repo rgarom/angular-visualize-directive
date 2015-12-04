@@ -71,8 +71,25 @@ angular.module('angular-visualize-directive', [])
                     },
 
                     function (v) {
-                        v("#"+element[0].id).report({resource:scope.resource,params: scope.params});
-                        spinner.stop();
+                        var report = v.report({
+                            runImediatly: false,
+                            resource:scope.resource,
+                            params: scope.params,
+                            container: "#"+element[0].id,
+                            error: function(){ //TODO handle error creating report
+                            }
+                        });
+                        
+                        report.refresh()
+                            .done(function(){
+                                console.log("report loaded");
+                            })
+                            .fail(function(){
+                                condole.log("report error")
+                            })
+                            .always(function(){
+                                spinner.stop();        
+                            });
                     },
 
                     function (err) {
